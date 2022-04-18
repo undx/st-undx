@@ -758,7 +758,7 @@ plumb(char *sel) {
             exit(1);
         exit(0);
     default:
-        waitpid(child, NULL, 0);
+        //waitpid(child, NULL, 0);
     }
 }
 
