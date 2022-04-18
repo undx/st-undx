@@ -270,6 +270,7 @@ static Shortcut shortcuts[] = {
 	{ ShiftMask,            XK_Page_Down,   kscrolldown,    {.i = -1} },
         { MODKEY,               XK_Scroll_Lock, externalpipe,   {.v = editscreencmd} },
         { TERMMOD,              XK_Scroll_Lock, externalpipe,   {.v = grablinkscmd} },
+	{ TERMMOD,              XK_Escape,      keyboard_select,{.i =  0} },
 
 };
 
