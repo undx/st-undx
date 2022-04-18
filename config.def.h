@@ -155,6 +155,21 @@ static unsigned int cursorstyle = 1;
 static Rune stcursor = 0x2603; /* snowman ("☃") */
 
 /*
+ * plumb_cmd is run on mouse button 3 click, with first NULL set to
+ * current selection and with cwd set to the cwd of the active shell
+ */
+static char *plumb_cmd[] = {"plumb", "-m", NULL, NULL};
+
+// cmds for externalpipe patch
+static char *openurlcmd[] = { "/bin/sh", "-c", 
+        "xurls | dmenu -l 10 -w $WINDOWID | xargs -r open", 
+"externalpipe", NULL };
+static char *grablinkscmd[] = { "/bin/sh", "-c", "linkgrabber.sh",
+"externalpipe", NULL };
+static char *editscreencmd[] = { "/bin/sh", "-c", "editscreen.sh",
+"externalpipe", NULL };
+
+/*
  * Default columns and rows numbers
  */
 
@@ -253,6 +268,8 @@ static Shortcut shortcuts[] = {
 	{ TERMMOD,              XK_S,           cyclefonts,     {}        },
 	{ ShiftMask,            XK_Page_Up,     kscrollup,      {.i = -1} },
 	{ ShiftMask,            XK_Page_Down,   kscrolldown,    {.i = -1} },
+        { MODKEY,               XK_Scroll_Lock, externalpipe,   {.v = editscreencmd} },
+        { TERMMOD,              XK_Scroll_Lock, externalpipe,   {.v = grablinkscmd} },
 
 };
 
@@ -526,8 +543,3 @@ static char ascii_printable[] =
 	"@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_"
 	"`abcdefghijklmnopqrstuvwxyz{|}~";
 
-/*
- * plumb_cmd is run on mouse button 3 click, with first NULL set to
- * current selection and with cwd set to the cwd of the active shell
- */
-static char *plumb_cmd[] = {"plumb", "-m", NULL, NULL};
