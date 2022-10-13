@@ -1,5 +1,5 @@
 # st version
-VERSION = 0.8.5
+VERSION = 0.8.5-undx
 
 # Customize below to fit your system
 
