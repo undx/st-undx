@@ -20,6 +20,7 @@ Afterwards enter the following command to build and install st (if necessary as 
 * Running st
 
 If you did not install st with make clean install, you must compile the st terminfo entry with the following command:
+
 #+BEGIN_SRC bash
 tic -sx st.info
 #END_SRC
@@ -44,6 +45,8 @@ Based on 0.8.5 suckless release.
 - external pipe (w/ eternal external pipe)
 - keyboard-select
 - default font size
+- font2
+- X11 cursor rendering
 
 ** Changelog
 - <2022-08-19 Fri> using guix
