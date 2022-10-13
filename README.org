@@ -48,6 +48,7 @@ Based on 0.8.5 suckless release.
 - font2
 - themed-cursor
 - anysize
+- vertcenter
 
 ** Changelog
 - <2022-08-19 Fri> using guix
