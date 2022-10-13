@@ -46,7 +46,8 @@ Based on 0.8.5 suckless release.
 - keyboard-select
 - default font size
 - font2
-- X11 cursor rendering
+- themed-cursor
+- anysize
 
 ** Changelog
 - <2022-08-19 Fri> using guix
