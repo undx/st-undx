@@ -117,7 +117,6 @@ int subprocwd(char *);
 int xgetcolor(int x, unsigned char *r, unsigned char *g, unsigned char *b);
 int  trt_kbdselect(KeySym, char *, int);
 
-
 /* config.h globals */
 extern char *utmp;
 extern char *scroll;
