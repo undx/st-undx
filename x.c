@@ -16,6 +16,7 @@
 #include <X11/keysym.h>
 #include <X11/Xft/Xft.h>
 #include <X11/XKBlib.h>
+#include <X11/Xcursor/Xcursor.h>
 #include <X11/Xresource.h>
 
 char *argv0;
@@ -1265,22 +1266,8 @@ xinit(int cols, int rows)
 	}
 
 	/* white cursor, black outline */
-	cursor = XCreateFontCursor(xw.dpy, mouseshape);
+        cursor = XcursorLibraryLoadCursor(xw.dpy, mouseshape);
 	XDefineCursor(xw.dpy, xw.win, cursor);
-
-	if (XParseColor(xw.dpy, xw.cmap, colorname[mousefg], &xmousefg) == 0) {
-		xmousefg.red   = 0xffff;
-		xmousefg.green = 0xffff;
-		xmousefg.blue  = 0xffff;
-	}
-
-	if (XParseColor(xw.dpy, xw.cmap, colorname[mousebg], &xmousebg) == 0) {
-		xmousebg.red   = 0x0000;
-		xmousebg.green = 0x0000;
-		xmousebg.blue  = 0x0000;
-	}
-
-	XRecolorCursor(xw.dpy, cursor, &xmousefg, &xmousebg);
 
 	xw.xembed = XInternAtom(xw.dpy, "_XEMBED", False);
 	xw.wmdeletewin = XInternAtom(xw.dpy, "WM_DELETE_WINDOW", False);
@@ -1721,7 +1708,7 @@ void
 xsettitle(char *p, int pop)
 {
  	XTextProperty prop;
- 
+
 	free(titlestack[tstki]);
 	if (pop) {
 		titlestack[tstki] = NULL;
@@ -1733,7 +1720,7 @@ xsettitle(char *p, int pop)
 		titlestack[tstki] = NULL;
 		p = opt_title;
 	}
- 
+
  	Xutf8TextListToTextProperty(xw.dpy, &p, 1, XUTF8StringStyle, &prop);
 	XSetWMName(xw.dpy, xw.win, &prop);
 	XSetTextProperty(xw.dpy, xw.win, &prop, xw.netwmname);
