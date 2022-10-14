@@ -23,7 +23,7 @@ If you did not install st with make clean install, you must compile the st termi
 
 #+BEGIN_SRC bash
 tic -sx st.info
-#END_SRC
+#+END_SRC
 
 See the man page for additional details.
 
