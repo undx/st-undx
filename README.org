@@ -49,10 +49,11 @@ Based on 0.8.5 suckless release.
 - themed-cursor
 - anysize
 - vertcenter
+- glyph wide support
 
 ** Changelog
 - <2022-08-19 Fri> using guix
-* TODOs
-** TODO guix - create a manifest.scm file for building st-undx
-** patches to validate / experiment
-- line_snap_delimiter (st-line_snap_delimiter-3bd7e43.diff)
+* TODO
+- guix - create a manifest.scm file for building st-undx
+- patches to validate / experiment
+  - line_snap_delimiter (st-line_snap_delimiter-3bd7e43.diff)
