@@ -2,6 +2,8 @@
 
 st is a simple terminal emulator for X which sucks less.
 
+#+CAPTION: Simple Terminal in action
+[[./assets/st.png]]
 
 * Requirements
 
