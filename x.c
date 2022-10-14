@@ -196,6 +196,7 @@ static void resize(XEvent *);
 static void focus(XEvent *);
 static uint buttonmask(uint);
 static int mouseaction(XEvent *, uint);
+static void plumb(char *);
 static void brelease(XEvent *);
 static void bpress(XEvent *);
 static void bmotion(XEvent *);
@@ -539,6 +540,11 @@ bpress(XEvent *e)
 		xsel.tclick1 = now;
 
 		selstart(evcol(e), evrow(e), snap);
+
+		if (snap == SNAP_WORD && match(PLUMBMASK, e->xbutton.state)) {
+			xsetsel(getsel());
+			plumb(xsel.primary);
+		}
 	}
 }
 

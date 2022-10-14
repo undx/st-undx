@@ -52,8 +52,10 @@ Based on 0.8.5 suckless release.
 - anysize
 - vertcenter
 - glyph wide support
+- double-click to plumb
 
 ** Changelog
+- <2022-10-14 Fri> rebase to master 0.9
 - <2022-08-19 Fri> using guix
 * TODO
 - guix - create a manifest.scm file for building st-undx

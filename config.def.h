@@ -540,6 +540,11 @@ static Key key[] = {
 };
 
 /*
+ * PLUMBMASK runs plumb_cmd on the selected word when double clicking while held down
+ */
+#define PLUMBMASK ShiftMask
+
+/*
  * Selection types' masks.
  * Use the same masks as usual.
  * Button1Mask is always unset, to make masks match between ButtonPress.
