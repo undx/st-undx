@@ -2301,7 +2301,8 @@ run:
 	xinit(cols, rows);
 	xsetenv();
 	selinit();
-	chdir(opt_dir);
+	if (! chdir(opt_dir))
+                setenv("PWD", opt_dir, 1);
 	run();
 
 	return 0;
