@@ -1,0 +1,79 @@
+#!/usr/bin/env bash
+#
+# Are you ready to plumb?
+#
+# ref: plan9, cockney rejects : THE best Oi! band (https://www.youtube.com/watch?v=Hz1KmZrxgGk)
+#
+# This script is gonna be my universal mime handler... Hope so!
+#
+# Inspired from Luke Smith's cabl i3-wm script.
+# Dependencies: xclip, xorg-xprop, qrencode, groff, zathura.
+#
+set -xeo pipefail
+#
+# how to handle what's incoming?
+#
+# check if any explicit command is passed first!
+# done with inspecting any dashed parms
+#  - edit
+#  - view
+#  - man
+#  - ?
+# check according passed string if any direct action using xsel
+# nope? ask for action then via rofi
+#
+
+echo "##### plumber is coming! #####"
+
+BROWSER="${BROWSER:-qutebrowser}"
+TERMINAL="${TERMINAL:-st}"
+
+getcwd(){
+    PID=$(xprop -id "$(xprop -root | awk '/_NET_ACTIVE_WINDOW\(WINDOW\)/{print $NF}')" | grep -m 1 PID | cut -d " " -f 3)
+    PID=$("$(pstree -lpA "$PID" | tail -n 1)" | awk -F'---' '{print $NF}' | sed -re 's/[^0-9]//g')
+    cd "$(readlink /proc/"$PID"/cwd)"
+}
+
+# available functions
+gotourl() {
+    echo "$@" | grep "^.*\.[A-Za-z]\+.*" >/dev/null || exit
+    "$BROWSER" "$@" ;
+}
+email() {
+    echo "$@" | grep "^.*@.*\.[A-Za-z]\+$" || exit
+    xdg-email "$@"
+}
+websearch() {
+    "$BROWSER" "https://duckduckgo.com/?q=$1" ;
+}
+wikipedia() {
+    "$BROWSER" "https://en.wikipedia.org/wiki/$1" ;
+}
+wiktionary() {
+    "$BROWSER" "https://en.wiktionary.org/wiki/$1" ;
+}
+maps() {
+    "$BROWSER" "https://www.openstreetmap.org/search?query=$1" ;
+}
+ebay() {
+    "$BROWSER" "https://www.ebay.com/sch/$1" ;
+}
+qrcode() {
+    command -v qrencode || exit
+    qrencode "$@" -s 10 -o /tmp/qr.png && xdg-open /tmp/qr.png ;
+}
+manual() {
+    man -k "^$prim$" >/dev/null || exit
+    man -Tpdf "$@" | zathura - ;
+}
+
+# st/plumber : should be in relevant directory
+# cwd="$(pwd)"
+prim="$(xclip -o)"; [ -z "$prim" ] && exit
+[ -f "$prim" ] && xdg-open "$prim" && exit
+[ -d "$prim" ] && "$TERMINAL" "$prim" && exit   
+
+
+func="$(declare -F | awk '{print $3}' | rofi -dmenu -p "Plumb \"$(echo "$prim" | cut -c -30)\" to?" -i -l 15)"
+
+[ -z "$func" ] || "$func" "$prim"
