@@ -85,6 +85,7 @@ Based on 0.9 suckless release.
 - vertcenter
 - glyph wide support
 - double-click to plumb
+- workingdir with personal fix of PWD environment variable
 
 ** Changelog
 - <2022-10-14 Fri> rebase to master 0.9
