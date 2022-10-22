@@ -174,13 +174,12 @@ static Rune stcursor = 0x2603; /* snowman ("☃") */
 static char *plumb_cmd[] = {"plumb", "-m", NULL, NULL};
 
 // cmds for externalpipe patch
-static char *openurlcmd[] = { "/bin/sh", "-c", 
-        "xurls | dmenu -l 10 -w $WINDOWID | xargs -r open", 
-"externalpipe", NULL };
-static char *grablinkscmd[] = { "/bin/sh", "-c", "linkgrabber.sh",
-"externalpipe", NULL };
-static char *editscreencmd[] = { "/bin/sh", "-c", "editscreen.sh",
-"externalpipe", NULL };
+static char *openurlcmd[] = { "/bin/sh", "-c", "st-urlhandler -o",
+        "externalpipe", NULL };
+static char *copyurlcmd[] = { "/bin/sh", "-c", "st-urlhandler -c",
+        "externalpipe", NULL };
+static char *editscreencmd[] = { "/bin/sh", "-c", "st-editscreen",
+        "externalpipe", NULL };
 
 /*
  * Default columns and rows numbers
@@ -284,7 +283,8 @@ static Shortcut shortcuts[] = {
 	{ ShiftMask,            XK_Page_Up,     kscrollup,      {.i = -1} },
 	{ ShiftMask,            XK_Page_Down,   kscrolldown,    {.i = -1} },
         { MODKEY,               XK_Scroll_Lock, externalpipe,   {.v = editscreencmd} },
-        { TERMMOD,              XK_Scroll_Lock, externalpipe,   {.v = grablinkscmd} },
+        { ControlMask,          XK_Scroll_Lock, externalpipe,   {.v = openurlcmd} },
+        { TERMMOD,              XK_Scroll_Lock, externalpipe,   {.v = copyurlcmd} },
 	{ TERMMOD,              XK_Escape,      keyboard_select,{.i =  0} },
 
 };

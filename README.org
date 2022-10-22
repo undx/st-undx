@@ -36,6 +36,9 @@ For other keybindings see manual page.
 
 ** Scripts
 
+- plumb :: universal launcher (plumber)
+- st-editscreen :: edit st scrollback buffer into =$EDITOR= (externalpipe).
+- st-urlhandler :: handle (copy/launch) urls in scrollback buffer (externalpipe).
 
 * Customization
  st can be customized by creating a custom config.h and (re)compiling the source code. This keeps it fast, secure and
@@ -88,7 +91,7 @@ Based on 0.9 suckless release.
 - <2022-08-19 Fri> using guix
 - base on 0.8.5 release
 
-* TODO
+* Stuff TODO
 - guix :: create a manifest.scm file for building st-undx
 - patches to validate/experiment:
   - line_snap_delimiter (st-line_snap_delimiter-3bd7e43.diff)
