@@ -770,6 +770,7 @@ plumb(char *sel) {
         exit(0);
     default:
         //waitpid(child, NULL, 0);
+	break;
     }
 }
 
